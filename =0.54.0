@@ -1,0 +1,5 @@
+Using pip 24.2 from /home/gitpod/.pyenv/versions/3.12.2/lib/python3.12/site-packages/pip (python 3.12)
+Requirement already satisfied: django-allauth in /workspace/.pip-modules/lib/python3.12/site-packages (65.0.2)
+Requirement already satisfied: Django>=4.2 in /workspace/.pip-modules/lib/python3.12/site-packages (from django-allauth) (4.2)
+Requirement already satisfied: asgiref<4,>=3.6.0 in /workspace/.pip-modules/lib/python3.12/site-packages (from Django>=4.2->django-allauth) (3.8.1)
+Requirement already satisfied: sqlparse>=0.3.1 in /workspace/.pip-modules/lib/python3.12/site-packages (from Django>=4.2->django-allauth) (0.5.1)
