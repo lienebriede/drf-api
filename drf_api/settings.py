@@ -40,7 +40,7 @@ DEBUG = 'DEV' in os.environ
 ALLOWED_HOSTS = [
     '8000-lienebriede-drfapi-a219h7ypih4.ws.codeinstitute-ide.net',
     'localhost',
-    '.herokuapp.com',
+    'drf-api-code-institute-915faa2a0d75.herokuapp.com',
 ]
 
 
