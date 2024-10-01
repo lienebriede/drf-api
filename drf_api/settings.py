@@ -56,6 +56,11 @@ INSTALLED_APPS = [
     'profiles',
 ]
 
+CSRF_TRUSTED_ORIGINS = [
+    'http://8000-lienebriede-drfapi-a219h7ypih4.ws.codeinstitute-ide.net',
+    'https://8000-lienebriede-drfapi-a219h7ypih4.ws.codeinstitute-ide.net',
+]
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
