@@ -18,6 +18,15 @@ import dj_database_url
 if os.path.exists('env.py'):
     import env
 
+# CORS settings
+CORS_ALLOWED_ORIGINS = [
+    "https://moments-r-7a6e87fd9b51.herokuapp.com",
+    "https://3000-lienebriede-momentsreac-8d4xw2i3l4z.ws.codeinstitute-ide.net",
+]
+
+CORS_ALLOW_CREDENTIALS = True
+
+# Cloudinary storage settings
 CLOUDINARY_STORAGE = {
     'CLOUDINARY_URL': os.environ.get('CLOUDINARY_URL')
 }
@@ -38,15 +47,16 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = 'DEV' in os.environ
 
+
 ALLOWED_HOSTS = [
     os.environ.get('ALLOWED_HOST'),
     '8000-lienebriede-drfapi-a219h7ypih4.ws.codeinstitute-ide.net',
     'localhost',
+    'moments-r-7a6e87fd9b51.herokuapp.com',
 ]
 
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -71,6 +81,7 @@ INSTALLED_APPS = [
 
 SITE_ID = 1
 
+# REST Framework settings
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [( 
         'rest_framework.authentication.SessionAuthentication' 
@@ -86,7 +97,8 @@ if 'DEV' not in os.environ:
     REST_FRAMEWORK['DEFAULT_RENDERER_CLASSES'] = [
         'rest_framework.renderers.JSONRenderer',
     ]
-    
+
+# JWT settings
 REST_USE_JWT = True
 JWT_AUTH_COOKIE = 'my-app-auth'
 JWT_AUTH_SECURE = True
@@ -95,7 +107,7 @@ JWT_AUTH_SAMESITE = 'None'
 
 REST_AUTH_SERIALIZERS = {'USER_DETAILS_SERIALIZER': 'drf_api.serializers.CurrentUserSerializer'}
 
-
+# CSRF trusted origins for secure cookies
 CSRF_TRUSTED_ORIGINS = [
     'http://8000-lienebriede-drfapi-a219h7ypih4.ws.codeinstitute-ide.net',
     'https://8000-lienebriede-drfapi-a219h7ypih4.ws.codeinstitute-ide.net',
@@ -113,6 +125,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+# CORS regex for development environment
 if 'CLIENT_ORIGIN_DEV' in os.environ:
     extracted_url = re.match(r'^.+-', os.environ.get('CLIENT_ORIGIN_DEV', ''), re.IGNORECASE).group(0)
     CORS_ALLOWED_ORIGIN_REGEXES = [
@@ -121,6 +134,7 @@ if 'CLIENT_ORIGIN_DEV' in os.environ:
 
 ROOT_URLCONF = 'drf_api.urls'
 
+# Templates configuration
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -142,7 +156,6 @@ WSGI_APPLICATION = 'drf_api.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-
 if 'DEV' in os.environ:
     DATABASES = {
         'default': {
