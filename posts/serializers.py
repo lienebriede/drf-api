@@ -11,8 +11,13 @@ class PostSerializer(serializers.ModelSerializer):
     like_id = serializers.SerializerMethodField()
     likes_count = serializers.ReadOnlyField()
     comments_count = serializers.ReadOnlyField()
+    image = serializers.ImageField(required=False)
 
     def validate_image(self, value):
+        print(f"Image size: {value.size}")
+        print(f"Image height: {value.image.height}")
+        print(f"Image width: {value.image.width}")
+
         if value.size > 2 * 1024 * 1024:
             raise serializers.ValidationError('Image size larger than 2MB!')
         if value.image.height > 4096:
@@ -25,6 +30,15 @@ class PostSerializer(serializers.ModelSerializer):
             )
         return value
 
+    def create(self, validated_data):
+        image = validated_data.pop('image', None)
+        post = Post.objects.create(**validated_data)
+        if image:
+            post.image = image
+            post.save()
+
+        return post
+    
     def get_is_owner(self, obj):
         request = self.context['request']
         return request.user == obj.owner

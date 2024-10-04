@@ -38,7 +38,11 @@ class PostList(generics.ListCreateAPIView):
     ]
 
     def perform_create(self, serializer):
-        serializer.save(owner=self.request.user)
+        try:
+            serializer.save(owner=self.request.user)
+        except Exception as e:
+            print(f"Error occurred: {str(e)}")
+            raise e
 
 
 class PostDetail(generics.RetrieveUpdateDestroyAPIView):
